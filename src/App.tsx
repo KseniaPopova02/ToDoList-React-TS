@@ -20,11 +20,21 @@ function App() {
     tasksForTodoList = tasks.filter((task) => !task.isDone);
   }
 
+  const addTask = (value: string) => {
+    const newTask = {
+      id: nanoid(),
+      title: value,
+      isDone: false,
+    };
+    const newTasks = [newTask, ...tasks];
+    setTasks(newTasks);
+  };
+
   const changeFilter = (value: FilterValuesType) => {
     setFilter(value);
   };
 
-  const handleDeleteTask = (id: string) => {
+  const deleteTask = (id: string) => {
     const filteredTasks = tasks.filter((task) => task.id !== id);
     setTasks(filteredTasks);
   };
@@ -32,8 +42,9 @@ function App() {
     <TodoList
       title={"What to learn"}
       tasks={tasksForTodoList}
-      handleDeleteTask={handleDeleteTask}
+      deleteTask={deleteTask}
       changeFilter={changeFilter}
+      addTask={addTask}
     />
   );
 }
