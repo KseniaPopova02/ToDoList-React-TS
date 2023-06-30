@@ -1,5 +1,8 @@
+import { tasks } from "./mockedData";
+import { TodoList } from "./modules";
+
 function App() {
-  return <div></div>;
+  return <TodoList title={"What to learn"} tasks={tasks} />;
 }
 
 export default App;
