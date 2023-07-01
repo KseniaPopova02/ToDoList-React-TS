@@ -20,14 +20,24 @@ function App() {
     tasksForTodoList = tasks.filter((task) => !task.isDone);
   }
 
-  const addTask = (value: string) => {
+  const addTask = (item: string) => {
     const newTask = {
       id: nanoid(),
-      title: value,
+      title: item,
       isDone: false,
     };
     const newTasks = [newTask, ...tasks];
     setTasks(newTasks);
+  };
+
+  const changeTaskStatus = (id: string) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === id) {
+        return { ...task, isDone: !task.isDone };
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
   };
 
   const changeFilter = (value: FilterValuesType) => {
@@ -45,6 +55,7 @@ function App() {
       deleteTask={deleteTask}
       changeFilter={changeFilter}
       addTask={addTask}
+      changeTaskStatus={changeTaskStatus}
     />
   );
 }

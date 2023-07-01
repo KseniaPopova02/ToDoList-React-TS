@@ -13,6 +13,7 @@ type PropsType = {
   deleteTask: (id: string) => void;
   changeFilter: (value: FilterValuesType) => void;
   addTask: (value: string) => void;
+  changeTaskStatus: (id: string) => void;
 };
 
 export const TodoList = (props: PropsType) => {
@@ -30,7 +31,10 @@ export const TodoList = (props: PropsType) => {
   };
 
   const addTask = () => {
-    props.addTask(newTaskTitle);
+    if (newTaskTitle.trim() === "") {
+      return;
+    }
+    props.addTask(newTaskTitle.trim());
     setNewTaskTitle("");
   };
 
@@ -92,9 +96,17 @@ export const TodoList = (props: PropsType) => {
             props.deleteTask(task.id);
           };
 
+          const handleCheckboxChange = () => {
+            props.changeTaskStatus(task.id);
+          };
+
           return (
             <li key={task.id}>
-              <input type="checkbox" checked={task.isDone} />
+              <input
+                type="checkbox"
+                onChange={handleCheckboxChange}
+                checked={task.isDone}
+              />
               <span>{task.title}</span>
               <button onClick={handleDeleteTask}>delete</button>
             </li>
