@@ -1,5 +1,5 @@
-import { ChangeEvent, KeyboardEvent, useState } from "react";
 import { FilterValuesType } from "../../App";
+import { AddItemForm } from "../../components";
 
 type TaskType = {
   id: string;
@@ -19,27 +19,6 @@ type PropsType = {
 };
 
 export const TodoList = (props: PropsType) => {
-  const [newTaskTitle, setNewTaskTitle] = useState("");
-
-  const handleChangeNewTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewTaskTitle(e.target.value);
-  };
-
-  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.charCode === 13) {
-      props.handleAddTask(newTaskTitle, props.id);
-      setNewTaskTitle("");
-    }
-  };
-
-  const addTask = () => {
-    if (newTaskTitle.trim() === "") {
-      return;
-    }
-    props.handleAddTask(newTaskTitle.trim(), props.id);
-    setNewTaskTitle("");
-  };
-
   const handleFilterChange = (value: FilterValuesType) => {
     switch (value) {
       case "all":
@@ -59,6 +38,11 @@ export const TodoList = (props: PropsType) => {
   const deleteTodoList = () => {
     props.handleDeleteTodoList(props.id);
   };
+
+  const addTask = (title: string) => {
+    props.handleAddTask(title, props.id);
+  };
+
   return (
     <>
       <h3>
@@ -90,15 +74,9 @@ export const TodoList = (props: PropsType) => {
           Completed
         </button>
       </div>
-      <div>
-        <input
-          type="text"
-          value={newTaskTitle}
-          onKeyPress={(e) => handleKeyPress(e)}
-          onChange={(e) => handleChangeNewTitle(e)}
-        />
-        <button onClick={addTask}>add</button>
-      </div>
+
+      <AddItemForm handleAddItem={addTask} />
+
       <ul>
         {props.tasks.map((task) => {
           const handleDeleteTask = () => {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TodoList } from "./modules";
 import { nanoid } from "nanoid";
+import { AddItemForm } from "./components";
 
 export type FilterValuesType = "all" | "completed" | "inProgress";
 
@@ -8,6 +9,18 @@ type todoListType = {
   id: string;
   title: string;
   filter: FilterValuesType;
+};
+//when refactoring it will double
+
+type TaskType = {
+  id: string;
+  title: string;
+  isDone: boolean;
+};
+
+//rename later
+type TasksStateType = {
+  [key: string]: Array<TaskType>;
 };
 
 function App() {
@@ -26,7 +39,7 @@ function App() {
     },
   ]);
 
-  const [tasks, setTasks] = useState({
+  const [tasks, setTasks] = useState<TasksStateType>({
     [todoListLearnId]: [
       { id: nanoid(), title: "JS", isDone: true },
       { id: nanoid(), title: "TS", isDone: false },
@@ -90,8 +103,19 @@ function App() {
     setTasks({ ...tasks });
   };
 
+  const addTodoList = (title: string) => {
+    const todoList: todoListType = {
+      id: nanoid(),
+      filter: "all",
+      title: title,
+    };
+    setTodoLists([todoList, ...todoLists]);
+    setTasks({ ...tasks, [todoList.id]: [] });
+  };
+
   return (
     <>
+      <AddItemForm handleAddItem={addTodoList} />
       {todoLists.map((todoList) => {
         let tasksForTodoList = tasks[todoList.id];
         if (todoList.filter === "completed") {
