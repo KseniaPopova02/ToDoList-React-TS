@@ -10,10 +10,11 @@ type TaskType = {
 type PropsType = {
   title: string;
   tasks: Array<TaskType>;
-  deleteTask: (id: string) => void;
-  changeFilter: (value: FilterValuesType) => void;
-  addTask: (value: string) => void;
-  changeTaskStatus: (id: string) => void;
+  deleteTask: (taskId: string, todoListId: string) => void;
+  changeFilter: (value: FilterValuesType, todoListId: string) => void;
+  handleAddTask: (item: string, todoListId: string) => void;
+  changeTaskStatus: (taskId: string, todoListId: string) => void;
+  id: string;
 };
 
 export const TodoList = (props: PropsType) => {
@@ -25,7 +26,7 @@ export const TodoList = (props: PropsType) => {
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.charCode === 13) {
-      props.addTask(newTaskTitle);
+      props.handleAddTask(newTaskTitle, props.id);
       setNewTaskTitle("");
     }
   };
@@ -34,20 +35,20 @@ export const TodoList = (props: PropsType) => {
     if (newTaskTitle.trim() === "") {
       return;
     }
-    props.addTask(newTaskTitle.trim());
+    props.handleAddTask(newTaskTitle.trim(), props.id);
     setNewTaskTitle("");
   };
 
   const handleFilterChange = (value: FilterValuesType) => {
     switch (value) {
       case "all":
-        props.changeFilter("all");
+        props.changeFilter("all", props.id);
         break;
       case "inProgress":
-        props.changeFilter("inProgress");
+        props.changeFilter("inProgress", props.id);
         break;
       case "completed":
-        props.changeFilter("completed");
+        props.changeFilter("completed", props.id);
         break;
       default:
         break;
@@ -93,11 +94,11 @@ export const TodoList = (props: PropsType) => {
       <ul>
         {props.tasks.map((task) => {
           const handleDeleteTask = () => {
-            props.deleteTask(task.id);
+            props.deleteTask(task.id, props.id);
           };
 
           const handleCheckboxChange = () => {
-            props.changeTaskStatus(task.id);
+            props.changeTaskStatus(task.id, props.id);
           };
 
           return (
