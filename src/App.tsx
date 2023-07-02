@@ -81,6 +81,15 @@ function App() {
     setTasks({ ...tasks });
   };
 
+  const handleDeleteTodoList = (todoListId: string) => {
+    const filteredTodoLists = todoLists.filter(
+      (todoList) => todoList.id !== todoListId
+    );
+    setTodoLists(filteredTodoLists);
+    delete tasks[todoListId];
+    setTasks({ ...tasks });
+  };
+
   return (
     <>
       {todoLists.map((todoList) => {
@@ -101,6 +110,7 @@ function App() {
             changeFilter={changeFilter}
             handleAddTask={handleAddTask}
             changeTaskStatus={changeTaskStatus}
+            handleDeleteTodoList={handleDeleteTodoList}
           />
         );
       })}

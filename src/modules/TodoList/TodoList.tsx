@@ -10,11 +10,12 @@ type TaskType = {
 type PropsType = {
   title: string;
   tasks: Array<TaskType>;
+  id: string;
   deleteTask: (taskId: string, todoListId: string) => void;
   changeFilter: (value: FilterValuesType, todoListId: string) => void;
   handleAddTask: (item: string, todoListId: string) => void;
   changeTaskStatus: (taskId: string, todoListId: string) => void;
-  id: string;
+  handleDeleteTodoList: (todoListId: string) => void;
 };
 
 export const TodoList = (props: PropsType) => {
@@ -54,9 +55,16 @@ export const TodoList = (props: PropsType) => {
         break;
     }
   };
+
+  const deleteTodoList = () => {
+    props.handleDeleteTodoList(props.id);
+  };
   return (
     <>
-      <h3>{props.title}</h3>
+      <h3>
+        {props.title}
+        <button onClick={deleteTodoList}>x</button>
+      </h3>
       <div>
         <button
           onClick={() => {
