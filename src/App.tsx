@@ -1,7 +1,13 @@
 import { TodoListContainer } from "./modules";
+import { GlobalStyle } from "./styles";
 
 function App() {
-  return <TodoListContainer />;
+  return (
+    <>
+      <GlobalStyle />
+      <TodoListContainer />
+    </>
+  );
 }
 
 export default App;

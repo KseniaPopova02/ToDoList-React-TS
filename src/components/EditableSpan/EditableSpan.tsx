@@ -1,4 +1,5 @@
 import { useState, ChangeEvent } from "react";
+import { Input } from "@mui/material";
 
 type PropsType = {
   title: string;
@@ -22,7 +23,7 @@ export const EditableSpan = (props: PropsType) => {
     setTitle(e.currentTarget.value);
 
   return editMode ? (
-    <input
+    <Input
       onChange={getTitleChangedValue}
       onBlur={activateViewMode}
       autoFocus

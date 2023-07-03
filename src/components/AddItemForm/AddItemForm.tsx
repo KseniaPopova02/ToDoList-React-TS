@@ -1,4 +1,5 @@
 import { useState, ChangeEvent, KeyboardEvent } from "react";
+import { OutlinedInput } from "@mui/material";
 
 type PropsType = {
   handleAddItem: (item: string) => void;
@@ -28,11 +29,15 @@ export const AddItemForm = (props: PropsType) => {
 
   return (
     <div>
-      <input
+      <OutlinedInput
         type="text"
         value={title}
-        onKeyPress={(e) => handleKeyPress(e)}
-        onChange={(e) => handleChangeNewTitle(e)}
+        onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) =>
+          handleKeyPress(e)
+        }
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          handleChangeNewTitle(e)
+        }
       />
       <button onClick={addTask}>add</button>
     </div>
