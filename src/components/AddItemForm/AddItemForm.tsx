@@ -1,11 +1,8 @@
 import { useState, ChangeEvent, KeyboardEvent } from "react";
 import { OutlinedInput } from "@mui/material";
+import { PropsTypeAddItemForm } from "./PropsTypeAddItemForm";
 
-type PropsType = {
-  handleAddItem: (item: string) => void;
-};
-
-export const AddItemForm = (props: PropsType) => {
+export const AddItemForm = (props: PropsTypeAddItemForm) => {
   const [title, setTitle] = useState("");
 
   const handleChangeNewTitle = (e: ChangeEvent<HTMLInputElement>) => {

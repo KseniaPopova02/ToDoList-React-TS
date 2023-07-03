@@ -1,20 +1,8 @@
 import React from "react";
 import { EditableSpan } from "../../components";
-import { TaskType } from "../../types";
+import { PropsTypeTasksList } from "./PropsTypeTasksList";
 
-type PropsType = {
-  tasks: Array<TaskType>;
-  id: string;
-  deleteTask: (taskId: string, todoListId: string) => void;
-  changeTaskStatus: (taskId: string, todoListId: string) => void;
-  changeTaskTitle: (
-    taskId: string,
-    newTitle: string,
-    todoListId: string
-  ) => void;
-};
-
-export const TasksList: React.FC<PropsType> = ({
+export const TasksList: React.FC<PropsTypeTasksList> = ({
   tasks,
   id,
   deleteTask,

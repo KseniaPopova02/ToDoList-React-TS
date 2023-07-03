@@ -1,11 +1,9 @@
 import React from "react";
-import { FilterValuesType } from "../../types";
+import { PropsTypeFilterBtns } from "./PropsTypeFilterBtns";
 
-type PropsType = {
-  handleFilterChange: (value: FilterValuesType) => void;
-};
-
-export const FilterBtns: React.FC<PropsType> = ({ handleFilterChange }) => {
+export const FilterBtns: React.FC<PropsTypeFilterBtns> = ({
+  handleFilterChange,
+}) => {
   return (
     <div>
       <button

@@ -1,12 +1,8 @@
 import { useState, ChangeEvent } from "react";
 import { Input } from "@mui/material";
+import { PropsTypeEditableSpan } from "./PropsTypeEdirableSpan";
 
-type PropsType = {
-  title: string;
-  handleTitleChange: (newValue: string) => void;
-};
-
-export const EditableSpan = (props: PropsType) => {
+export const EditableSpan = (props: PropsTypeEditableSpan) => {
   const [editMode, setEditMode] = useState(false);
   const [title, setTitle] = useState("");
 

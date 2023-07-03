@@ -1,13 +1,8 @@
 import React from "react";
 import { EditableSpan } from "../../components";
+import { PropsTypeInputAddTL } from "./PropsTypeInputAddTL";
 
-type PropsType = {
-  title: string;
-  handleChangeTodoListTitle: (newTitle: string) => void;
-  deleteTodoList: () => void;
-};
-
-export const InputAddTL: React.FC<PropsType> = ({
+export const InputAddTL: React.FC<PropsTypeInputAddTL> = ({
   title,
   handleChangeTodoListTitle,
   deleteTodoList,
