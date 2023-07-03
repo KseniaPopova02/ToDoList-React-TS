@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from "react";
 import { Input } from "@mui/material";
-import { PropsTypeEditableSpan } from "./PropsTypeEdirableSpan";
+import { PropsTypeEditableSpan } from "./PropsTypeEditableSpan";
 
 export const EditableSpan = (props: PropsTypeEditableSpan) => {
   const [editMode, setEditMode] = useState(false);

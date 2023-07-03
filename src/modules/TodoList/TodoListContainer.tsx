@@ -2,29 +2,12 @@ import { useState } from "react";
 import { nanoid } from "nanoid";
 import { AddItemForm } from "../../components";
 import { TodoListRep } from "./TodoListRep";
-
-export type FilterValuesType = "all" | "completed" | "inProgress";
-
-type todoListType = {
-  id: string;
-  title: string;
-  filter: FilterValuesType;
-};
-
-type TaskType = {
-  id: string;
-  title: string;
-  isDone: boolean;
-};
-
-type TasksStateType = {
-  [key: string]: Array<TaskType>;
-};
+import { TasksStateType, FilterValuesType, TodoListType } from "../../types";
 
 export const TodoListContainer = () => {
   const todoListLearnId = nanoid();
   const todoListBuyId = nanoid();
-  const [todoLists, setTodoLists] = useState<Array<todoListType>>([
+  const [todoLists, setTodoLists] = useState<Array<TodoListType>>([
     {
       id: todoListLearnId,
       title: "What to learn",
@@ -143,7 +126,7 @@ export const TodoListContainer = () => {
   };
 
   const addTodoList = (title: string) => {
-    const todoList: todoListType = {
+    const todoList: TodoListType = {
       id: nanoid(),
       filter: "all",
       title: title,
