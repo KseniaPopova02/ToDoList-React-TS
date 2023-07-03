@@ -1,11 +1,8 @@
-import { FilterValuesType } from "./types";
+import { FilterValuesType, TaskType } from "../../types";
 import { AddItemForm, EditableSpan } from "../../components";
-
-type TaskType = {
-  id: string;
-  title: string;
-  isDone: boolean;
-};
+import { InputAddTL } from "../InputAddTL";
+import { FilterBtns } from "../FilterBtns";
+import { TasksList } from "../TasksList";
 
 type PropsType = {
   title: string;
@@ -55,71 +52,22 @@ export const TodoListRep = (props: PropsType) => {
 
   return (
     <>
-      <h3>
-        <EditableSpan
-          title={props.title}
-          handleTitleChange={handleChangeTodoListTitle}
-        />
-        <button onClick={deleteTodoList}>x</button>
-      </h3>
-      <div>
-        <button
-          onClick={() => {
-            handleFilterChange("all");
-          }}
-        >
-          All
-        </button>
-
-        <button
-          onClick={() => {
-            handleFilterChange("inProgress");
-          }}
-        >
-          In progress
-        </button>
-
-        <button
-          onClick={() => {
-            handleFilterChange("completed");
-          }}
-        >
-          Completed
-        </button>
-      </div>
+      <InputAddTL
+        title={props.title}
+        handleChangeTodoListTitle={handleChangeTodoListTitle}
+        deleteTodoList={deleteTodoList}
+      />
+      <FilterBtns handleFilterChange={handleFilterChange} />
 
       <AddItemForm handleAddItem={addTask} />
 
-      <ul>
-        {props.tasks.map((task) => {
-          const handleDeleteTask = () => {
-            props.deleteTask(task.id, props.id);
-          };
-
-          const handleCheckboxChange = () => {
-            props.changeTaskStatus(task.id, props.id);
-          };
-
-          const handleTitleChange = (newValue: string) => {
-            props.changeTaskTitle(task.id, newValue, props.id);
-          };
-
-          return (
-            <li key={task.id}>
-              <input
-                type="checkbox"
-                onChange={handleCheckboxChange}
-                checked={task.isDone}
-              />
-              <EditableSpan
-                title={task.title}
-                handleTitleChange={handleTitleChange}
-              />
-              <button onClick={handleDeleteTask}>delete</button>
-            </li>
-          );
-        })}
-      </ul>
+      <TasksList
+        tasks={props.tasks}
+        id={props.id}
+        deleteTask={props.deleteTask}
+        changeTaskStatus={props.changeTaskStatus}
+        changeTaskTitle={props.changeTaskTitle}
+      />
     </>
   );
 };
