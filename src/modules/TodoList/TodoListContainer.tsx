@@ -58,21 +58,26 @@ export const TodoListContainer = () => {
     };
     const todoListTasks = tasks[todoListId];
     const newTasks = [newTask, ...todoListTasks];
-    tasks[todoListId] = newTasks;
-    setTasks({ ...tasks });
+    const updatedTasks = {
+      ...tasks,
+      [todoListId]: newTasks,
+    };
+    setTasks(updatedTasks);
   };
 
   const changeTaskStatus = (taskId: string, todoListId: string) => {
-    const updatedTasks = { ...tasks };
-    const todoListTasks = updatedTasks[todoListId];
-    const updatedTodoListTasks = todoListTasks.map((task) => {
+    const todoListTasks = tasks[todoListId];
+    const updatedTasks = todoListTasks.map((task) => {
       if (task.id === taskId) {
         return { ...task, isDone: !task.isDone };
       }
       return task;
     });
-    updatedTasks[todoListId] = updatedTodoListTasks;
-    setTasks(updatedTasks);
+    const updatedTodoListTasks = {
+      ...tasks,
+      [todoListId]: updatedTasks,
+    };
+    setTasks(updatedTodoListTasks);
   };
 
   const changeTaskTitle = (
@@ -80,16 +85,18 @@ export const TodoListContainer = () => {
     newTitle: string,
     todoListId: string
   ) => {
-    const updatedTasks = { ...tasks };
-    const todoListTasks = updatedTasks[todoListId];
-    const updatedTodoListTasks = todoListTasks.map((task) => {
+    const todoListTasks = tasks[todoListId];
+    const updatedTasks = todoListTasks.map((task) => {
       if (task.id === taskId) {
         return { ...task, title: newTitle };
       }
       return task;
     });
-    updatedTasks[todoListId] = updatedTodoListTasks;
-    setTasks(updatedTasks);
+    const updatedTodoListTasks = {
+      ...tasks,
+      [todoListId]: updatedTasks,
+    };
+    setTasks(updatedTodoListTasks);
   };
 
   const changeFilter = (value: FilterValuesType, todoListId: string) => {
@@ -105,8 +112,11 @@ export const TodoListContainer = () => {
   const deleteTask = (taskId: string, todoListId: string) => {
     const todoListTasks = tasks[todoListId];
     const filteredTasks = todoListTasks.filter((task) => task.id !== taskId);
-    tasks[todoListId] = filteredTasks;
-    setTasks({ ...tasks });
+    const updatedTasks = {
+      ...tasks,
+      [todoListId]: filteredTasks,
+    };
+    setTasks(updatedTasks);
   };
 
   const handleDeleteTodoList = (todoListId: string) => {
@@ -114,19 +124,22 @@ export const TodoListContainer = () => {
       (todoList) => todoList.id !== todoListId
     );
     setTodoLists(filteredTodoLists);
-    delete tasks[todoListId];
-    setTasks({ ...tasks });
+    const updatedTasks = { ...tasks };
+    delete updatedTasks[todoListId];
+    setTasks(updatedTasks);
   };
 
   const changeTodoListTitle = (
     todoListId: string,
     newTodoListTitle: string
   ) => {
-    const todoList = todoLists.find((todoList) => todoList.id === todoListId);
-    if (todoList) {
-      todoList.title = newTodoListTitle;
-      setTodoLists([...todoLists]);
-    }
+    const updatedTodoLists = todoLists.map((todoList) => {
+      if (todoList.id === todoListId) {
+        return { ...todoList, title: newTodoListTitle };
+      }
+      return todoList;
+    });
+    setTodoLists(updatedTodoLists);
   };
 
   const addTodoList = (title: string) => {
@@ -135,8 +148,14 @@ export const TodoListContainer = () => {
       filter: "all",
       title: title,
     };
-    setTodoLists([todoList, ...todoLists]);
-    setTasks({ ...tasks, [todoList.id]: [] });
+    const updatedTodoLists = [todoList, ...todoLists];
+    setTodoLists(updatedTodoLists);
+
+    const updatedTasks = {
+      ...tasks,
+      [todoList.id]: [],
+    };
+    setTasks(updatedTasks);
   };
   return (
     <>
