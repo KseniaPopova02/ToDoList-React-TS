@@ -4,7 +4,7 @@ import { AddItemForm } from "../components";
 import { InputAddTL, FilterBtns, TasksList } from "../modules";
 import { TasksStateType, FilterValuesType, TodoListType } from "../types";
 
-export const TodoListAll = () => {
+export const TodoList = () => {
   const todoListLearnId = nanoid();
   const todoListBuyId = nanoid();
   const [todoLists, setTodoLists] = useState<Array<TodoListType>>([

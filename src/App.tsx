@@ -1,11 +1,11 @@
-import { TodoListAll } from "./TodoList";
+import { TodoList } from "./TodoList";
 import { GlobalStyle } from "./styles";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <TodoListAll />
+      <TodoList />
     </>
   );
 }
