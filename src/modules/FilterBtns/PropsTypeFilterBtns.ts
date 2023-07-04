@@ -1,5 +1,6 @@
 import { FilterValuesType } from "../../types";
 
 export type PropsTypeFilterBtns = {
-  handleFilterChange: (value: FilterValuesType) => void;
+  todoListId: string;
+  changeFilter: (value: FilterValuesType, todoListId: string) => void;
 };

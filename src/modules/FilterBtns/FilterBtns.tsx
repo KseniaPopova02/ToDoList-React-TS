@@ -1,9 +1,26 @@
 import React from "react";
 import { PropsTypeFilterBtns } from "./PropsTypeFilterBtns";
+import { FilterValuesType } from "../../types";
 
 export const FilterBtns: React.FC<PropsTypeFilterBtns> = ({
-  handleFilterChange,
+  changeFilter,
+  todoListId,
 }) => {
+  const handleFilterChange = (value: FilterValuesType) => {
+    switch (value) {
+      case "all":
+        changeFilter("all", todoListId);
+        break;
+      case "inProgress":
+        changeFilter("inProgress", todoListId);
+        break;
+      case "completed":
+        changeFilter("completed", todoListId);
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <div>
       <button

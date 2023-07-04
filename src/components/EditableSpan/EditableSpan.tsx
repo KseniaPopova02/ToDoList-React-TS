@@ -4,28 +4,29 @@ import { PropsTypeEditableSpan } from "./PropsTypeEditableSpan";
 
 export const EditableSpan: React.FC<PropsTypeEditableSpan> = ({
   handleTitleChange,
+  title,
 }) => {
   const [editMode, setEditMode] = useState(false);
-  const [title, setTitle] = useState("");
+  const [newTitle, setNewTitle] = useState("");
 
   const activateEditMode = () => {
     setEditMode(true);
-    setTitle(title);
+    setNewTitle(title);
   };
   const activateViewMode = () => {
     setEditMode(false);
-    handleTitleChange(title);
+    handleTitleChange(newTitle);
   };
 
   const getTitleChangedValue = (e: ChangeEvent<HTMLInputElement>) =>
-    setTitle(e.currentTarget.value);
+    setNewTitle(e.currentTarget.value);
 
   return editMode ? (
     <Input
       onChange={getTitleChangedValue}
       onBlur={activateViewMode}
       autoFocus
-      value={title}
+      value={newTitle}
     />
   ) : (
     <span onDoubleClick={activateEditMode}>{title}</span>

@@ -18,7 +18,7 @@ export const AddItemForm: React.FC<PropsTypeAddItemForm> = ({
     }
   };
 
-  const addTask = () => {
+  const addTitle = () => {
     if (title.trim() === "") {
       return;
     }
@@ -38,7 +38,7 @@ export const AddItemForm: React.FC<PropsTypeAddItemForm> = ({
           handleChangeNewTitle(e)
         }
       />
-      <button onClick={addTask}>add</button>
+      <button onClick={addTitle}>add</button>
     </div>
   );
 };

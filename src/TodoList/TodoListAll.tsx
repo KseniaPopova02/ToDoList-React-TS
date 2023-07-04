@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import { AddItemForm } from "../components";
-import { TodoListRep } from "./TodoListRep";
+import { InputAddTL, FilterBtns, TasksList } from "../modules";
 import { TasksStateType, FilterValuesType, TodoListType } from "../types";
 
-export const TodoList = () => {
+export const TodoListAll = () => {
   const todoListLearnId = nanoid();
   const todoListBuyId = nanoid();
   const [todoLists, setTodoLists] = useState<Array<TodoListType>>([
@@ -153,19 +153,29 @@ export const TodoList = () => {
           todoListTasks = todoListTasks.filter((task) => !task.isDone);
         }
         return (
-          <TodoListRep
-            key={todoList.id}
-            todoListId={todoList.id}
-            title={todoList.title}
-            tasks={todoListTasks}
-            deleteTask={deleteTask}
-            changeFilter={changeFilter}
-            addTask={addTask}
-            changeTaskStatus={changeTaskStatus}
-            changeTaskTitle={changeTaskTitle}
-            deleteTodoList={deleteTodoList}
-            changeTodoListTitle={changeTodoListTitle}
-          />
+          <div key={todoList.id}>
+            <InputAddTL
+              title={todoList.title}
+              todoListId={todoList.id}
+              changeTodoListTitle={changeTodoListTitle}
+              deleteTodoList={deleteTodoList}
+            />
+            <FilterBtns changeFilter={changeFilter} todoListId={todoList.id} />
+
+            <AddItemForm
+              handleAddItem={(title: string) => {
+                addTask(title, todoList.id);
+              }}
+            />
+
+            <TasksList
+              tasks={todoListTasks}
+              todoListId={todoList.id}
+              deleteTask={deleteTask}
+              changeTaskStatus={changeTaskStatus}
+              changeTaskTitle={changeTaskTitle}
+            />
+          </div>
         );
       })}
     </>

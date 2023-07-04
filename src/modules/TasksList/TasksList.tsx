@@ -4,7 +4,7 @@ import { PropsTypeTasksList } from "./PropsTypeTasksList";
 
 export const TasksList: React.FC<PropsTypeTasksList> = ({
   tasks,
-  id,
+  todoListId,
   deleteTask,
   changeTaskStatus,
   changeTaskTitle,
@@ -13,15 +13,15 @@ export const TasksList: React.FC<PropsTypeTasksList> = ({
     <ul>
       {tasks.map((task) => {
         const handleDeleteTask = () => {
-          deleteTask(task.id, id);
+          deleteTask(task.id, todoListId);
         };
 
         const handleCheckboxChange = () => {
-          changeTaskStatus(task.id, id);
+          changeTaskStatus(task.id, todoListId);
         };
 
         const handleTitleChange = (newValue: string) => {
-          changeTaskTitle(task.id, newValue, id);
+          changeTaskTitle(task.id, newValue, todoListId);
         };
 
         return (

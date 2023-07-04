@@ -4,9 +4,17 @@ import { PropsTypeInputAddTL } from "./PropsTypeInputAddTL";
 
 export const InputAddTL: React.FC<PropsTypeInputAddTL> = ({
   title,
-  handleChangeTodoListTitle,
-  handleDeleteTodoList,
+  todoListId,
+  changeTodoListTitle,
+  deleteTodoList,
 }) => {
+  const handleDeleteTodoList = () => {
+    deleteTodoList(todoListId);
+  };
+  const handleChangeTodoListTitle = (newTitle: string) => {
+    changeTodoListTitle(todoListId, newTitle);
+  };
+  console.log(title);
   return (
     <div>
       <EditableSpan
