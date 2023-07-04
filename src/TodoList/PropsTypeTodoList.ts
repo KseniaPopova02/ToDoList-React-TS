@@ -1,4 +1,4 @@
-import { FilterValuesType, TaskType } from "../../types";
+import { FilterValuesType, TaskType } from "../types";
 
 export type PropsTypeTodoList = {
   title: string;

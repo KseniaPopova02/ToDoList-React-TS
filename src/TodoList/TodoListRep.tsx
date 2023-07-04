@@ -1,8 +1,6 @@
-import { FilterValuesType } from "../../types";
-import { AddItemForm } from "../../components";
-import { InputAddTL } from "../InputAddTL";
-import { FilterBtns } from "../FilterBtns";
-import { TasksList } from "../TasksList";
+import { FilterValuesType } from "../types";
+import { AddItemForm } from "../components";
+import { InputAddTL, FilterBtns, TasksList } from "../modules";
 import React from "react";
 import { PropsTypeTodoList } from "./PropsTypeTodoList";
 

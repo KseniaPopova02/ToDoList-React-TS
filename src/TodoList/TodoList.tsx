@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
-import { AddItemForm } from "../../components";
+import { AddItemForm } from "../components";
 import { TodoListRep } from "./TodoListRep";
-import { TasksStateType, FilterValuesType, TodoListType } from "../../types";
+import { TasksStateType, FilterValuesType, TodoListType } from "../types";
 
-export const TodoListContainer = () => {
+export const TodoList = () => {
   const todoListLearnId = nanoid();
   const todoListBuyId = nanoid();
   const [todoLists, setTodoLists] = useState<Array<TodoListType>>([

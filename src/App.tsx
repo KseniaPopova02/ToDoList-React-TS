@@ -1,11 +1,11 @@
-import { TodoListContainer } from "./modules";
+import { TodoList } from "./TodoList";
 import { GlobalStyle } from "./styles";
 
 function App() {
   return (
     <>
       <GlobalStyle />
-      <TodoListContainer />
+      <TodoList />
     </>
   );
 }
