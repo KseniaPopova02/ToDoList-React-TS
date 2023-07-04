@@ -2,7 +2,12 @@ import { useState } from "react";
 import { nanoid } from "nanoid";
 import { AddItemForm } from "../components";
 import { InputAddTL, FilterBtns, TasksList } from "../modules";
-import { TasksStateType, FilterValuesType, TodoListType } from "../types";
+import {
+  TasksStateType,
+  FilterValuesType,
+  TodoListType,
+  TaskType,
+} from "../types";
 
 export const TodoList = () => {
   const todoListLearnId = nanoid();
@@ -141,6 +146,18 @@ export const TodoList = () => {
     setTodoLists(updatedTodoLists);
   };
 
+  const getFilteredTasks = (todoList: TodoListType): TaskType[] => {
+    const todoListTasks = tasks[todoList.id] || [];
+
+    const filteredTasks =
+      todoList.filter === "completed"
+        ? todoListTasks.filter((task) => task.isDone)
+        : todoList.filter === "inProgress"
+        ? todoListTasks.filter((task) => !task.isDone)
+        : todoListTasks;
+    return filteredTasks;
+  };
+
   return (
     <>
       <AddItemForm
@@ -148,13 +165,7 @@ export const TodoList = () => {
         handleAddItem={addTodoList}
       />
       {todoLists.map((todoList) => {
-        let todoListTasks = tasks[todoList.id];
-        if (todoList.filter === "completed") {
-          todoListTasks = todoListTasks.filter((task) => task.isDone);
-        }
-        if (todoList.filter === "inProgress") {
-          todoListTasks = todoListTasks.filter((task) => !task.isDone);
-        }
+        const filteredTasks = getFilteredTasks(todoList);
         return (
           <div key={todoList.id}>
             <InputAddTL
@@ -173,7 +184,7 @@ export const TodoList = () => {
             />
 
             <TasksList
-              tasks={todoListTasks}
+              tasks={filteredTasks}
               todoListId={todoList.id}
               deleteTask={deleteTask}
               changeTaskStatus={changeTaskStatus}

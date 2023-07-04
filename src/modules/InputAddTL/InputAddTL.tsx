@@ -14,7 +14,7 @@ export const InputAddTL: React.FC<PropsTypeInputAddTL> = ({
   const handleChangeTodoListTitle = (newTitle: string) => {
     changeTodoListTitle(todoListId, newTitle);
   };
-  console.log(title);
+
   return (
     <div>
       <EditableSpan
