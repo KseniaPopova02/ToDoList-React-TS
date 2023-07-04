@@ -5,7 +5,7 @@ import { PropsTypeInputAddTL } from "./PropsTypeInputAddTL";
 export const InputAddTL: React.FC<PropsTypeInputAddTL> = ({
   title,
   handleChangeTodoListTitle,
-  deleteTodoList,
+  handleDeleteTodoList,
 }) => {
   return (
     <div>
@@ -13,7 +13,7 @@ export const InputAddTL: React.FC<PropsTypeInputAddTL> = ({
         title={title}
         handleTitleChange={handleChangeTodoListTitle}
       />
-      <button onClick={deleteTodoList}>x</button>
+      <button onClick={handleDeleteTodoList}>x</button>
     </div>
   );
 };

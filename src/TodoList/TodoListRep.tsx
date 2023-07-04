@@ -7,41 +7,41 @@ import { PropsTypeTodoList } from "./PropsTypeTodoList";
 export const TodoListRep: React.FC<PropsTypeTodoList> = ({
   title,
   tasks,
-  id,
+  todoListId,
   deleteTask,
   changeFilter,
-  handleAddTask,
+  addTask,
   changeTaskStatus,
-  handleDeleteTodoList,
+  deleteTodoList,
   changeTaskTitle,
   changeTodoListTitle,
 }) => {
   const handleFilterChange = (value: FilterValuesType) => {
     switch (value) {
       case "all":
-        changeFilter("all", id);
+        changeFilter("all", todoListId);
         break;
       case "inProgress":
-        changeFilter("inProgress", id);
+        changeFilter("inProgress", todoListId);
         break;
       case "completed":
-        changeFilter("completed", id);
+        changeFilter("completed", todoListId);
         break;
       default:
         break;
     }
   };
 
-  const deleteTodoList = () => {
-    handleDeleteTodoList(id);
+  const handleDeleteTodoList = () => {
+    deleteTodoList(todoListId);
   };
 
-  const addTask = (title: string) => {
-    handleAddTask(title, id);
+  const handleAddTask = (title: string) => {
+    addTask(title, todoListId);
   };
 
   const handleChangeTodoListTitle = (newTitle: string) => {
-    changeTodoListTitle(id, newTitle);
+    changeTodoListTitle(todoListId, newTitle);
   };
 
   return (
@@ -49,15 +49,15 @@ export const TodoListRep: React.FC<PropsTypeTodoList> = ({
       <InputAddTL
         title={title}
         handleChangeTodoListTitle={handleChangeTodoListTitle}
-        deleteTodoList={deleteTodoList}
+        handleDeleteTodoList={handleDeleteTodoList}
       />
       <FilterBtns handleFilterChange={handleFilterChange} />
 
-      <AddItemForm handleAddItem={addTask} />
+      <AddItemForm handleAddItem={handleAddTask} />
 
       <TasksList
         tasks={tasks}
-        id={id}
+        id={todoListId}
         deleteTask={deleteTask}
         changeTaskStatus={changeTaskStatus}
         changeTaskTitle={changeTaskTitle}

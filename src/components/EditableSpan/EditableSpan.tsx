@@ -1,18 +1,20 @@
-import { useState, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { Input } from "@mui/material";
 import { PropsTypeEditableSpan } from "./PropsTypeEditableSpan";
 
-export const EditableSpan = (props: PropsTypeEditableSpan) => {
+export const EditableSpan: React.FC<PropsTypeEditableSpan> = ({
+  handleTitleChange,
+}) => {
   const [editMode, setEditMode] = useState(false);
   const [title, setTitle] = useState("");
 
   const activateEditMode = () => {
     setEditMode(true);
-    setTitle(props.title);
+    setTitle(title);
   };
   const activateViewMode = () => {
     setEditMode(false);
-    props.handleTitleChange(title);
+    handleTitleChange(title);
   };
 
   const getTitleChangedValue = (e: ChangeEvent<HTMLInputElement>) =>
@@ -26,6 +28,6 @@ export const EditableSpan = (props: PropsTypeEditableSpan) => {
       value={title}
     />
   ) : (
-    <span onDoubleClick={activateEditMode}>{props.title}</span>
+    <span onDoubleClick={activateEditMode}>{title}</span>
   );
 };

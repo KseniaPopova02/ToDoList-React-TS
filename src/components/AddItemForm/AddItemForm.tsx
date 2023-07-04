@@ -1,8 +1,10 @@
-import { useState, ChangeEvent, KeyboardEvent } from "react";
+import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import { OutlinedInput } from "@mui/material";
 import { PropsTypeAddItemForm } from "./PropsTypeAddItemForm";
 
-export const AddItemForm = (props: PropsTypeAddItemForm) => {
+export const AddItemForm: React.FC<PropsTypeAddItemForm> = ({
+  handleAddItem,
+}) => {
   const [title, setTitle] = useState("");
 
   const handleChangeNewTitle = (e: ChangeEvent<HTMLInputElement>) => {
@@ -11,7 +13,7 @@ export const AddItemForm = (props: PropsTypeAddItemForm) => {
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.charCode === 13) {
-      props.handleAddItem(title);
+      handleAddItem(title);
       setTitle("");
     }
   };
@@ -20,7 +22,7 @@ export const AddItemForm = (props: PropsTypeAddItemForm) => {
     if (title.trim() === "") {
       return;
     }
-    props.handleAddItem(title.trim());
+    handleAddItem(title.trim());
     setTitle("");
   };
 
