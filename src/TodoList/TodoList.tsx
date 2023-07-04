@@ -143,7 +143,10 @@ export const TodoList = () => {
 
   return (
     <>
-      <AddItemForm handleAddItem={addTodoList} />
+      <AddItemForm
+        placeholderText="name your todo list"
+        handleAddItem={addTodoList}
+      />
       {todoLists.map((todoList) => {
         let todoListTasks = tasks[todoList.id];
         if (todoList.filter === "completed") {
@@ -163,6 +166,7 @@ export const TodoList = () => {
             <FilterBtns changeFilter={changeFilter} todoListId={todoList.id} />
 
             <AddItemForm
+              placeholderText={"enter your task"}
               handleAddItem={(title: string) => {
                 addTask(title, todoList.id);
               }}

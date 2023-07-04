@@ -4,6 +4,7 @@ import { PropsTypeAddItemForm } from "./PropsTypeAddItemForm";
 
 export const AddItemForm: React.FC<PropsTypeAddItemForm> = ({
   handleAddItem,
+  placeholderText,
 }) => {
   const [title, setTitle] = useState("");
 
@@ -30,6 +31,7 @@ export const AddItemForm: React.FC<PropsTypeAddItemForm> = ({
     <div>
       <OutlinedInput
         type="text"
+        placeholder={placeholderText}
         value={title}
         onKeyPress={(e: React.KeyboardEvent<HTMLInputElement>) =>
           handleKeyPress(e)
