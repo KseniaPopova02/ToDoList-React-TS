@@ -8,6 +8,12 @@ import {
   TodoListType,
   TaskType,
 } from "../types";
+import {
+  TodoListInputWrapper,
+  TodoListWrapper,
+  TodoListsWrapper,
+  Wrapper,
+} from "./style";
 
 export const TodoList = () => {
   const todoListLearnId = nanoid();
@@ -159,40 +165,48 @@ export const TodoList = () => {
   };
 
   return (
-    <>
-      <AddItemForm
-        placeholderText="name your todo list"
-        handleAddItem={addTodoList}
-      />
-      {todoLists.map((todoList) => {
-        const filteredTasks = getFilteredTasks(todoList);
-        return (
-          <div key={todoList.id}>
-            <InputAddTL
-              title={todoList.title}
-              todoListId={todoList.id}
-              changeTodoListTitle={changeTodoListTitle}
-              deleteTodoList={deleteTodoList}
-            />
-            <FilterBtns changeFilter={changeFilter} todoListId={todoList.id} />
+    <Wrapper>
+      <TodoListInputWrapper>
+        <AddItemForm
+          placeholderText="name your todo list"
+          handleAddItem={addTodoList}
+        />
+      </TodoListInputWrapper>
+      <TodoListsWrapper>
+        {todoLists.map((todoList) => {
+          const filteredTasks = getFilteredTasks(todoList);
 
-            <AddItemForm
-              placeholderText={"enter your task"}
-              handleAddItem={(title: string) => {
-                addTask(title, todoList.id);
-              }}
-            />
+          return (
+            <TodoListWrapper key={todoList.id}>
+              <InputAddTL
+                title={todoList.title}
+                todoListId={todoList.id}
+                changeTodoListTitle={changeTodoListTitle}
+                deleteTodoList={deleteTodoList}
+              />
+              <FilterBtns
+                changeFilter={changeFilter}
+                todoListId={todoList.id}
+              />
 
-            <TasksList
-              tasks={filteredTasks}
-              todoListId={todoList.id}
-              deleteTask={deleteTask}
-              changeTaskStatus={changeTaskStatus}
-              changeTaskTitle={changeTaskTitle}
-            />
-          </div>
-        );
-      })}
-    </>
+              <AddItemForm
+                placeholderText={"enter your task"}
+                handleAddItem={(title: string) => {
+                  addTask(title, todoList.id);
+                }}
+              />
+
+              <TasksList
+                tasks={filteredTasks}
+                todoListId={todoList.id}
+                deleteTask={deleteTask}
+                changeTaskStatus={changeTaskStatus}
+                changeTaskTitle={changeTaskTitle}
+              />
+            </TodoListWrapper>
+          );
+        })}
+      </TodoListsWrapper>
+    </Wrapper>
   );
 };
