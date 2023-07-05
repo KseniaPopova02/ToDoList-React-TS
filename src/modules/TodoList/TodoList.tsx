@@ -1,6 +1,6 @@
 import React from "react";
 import { PropsTypeTodoList } from "./PropsTypeTodoList";
-import { InputAddTL } from "../InputAddTL";
+import { TodoListTitle } from "../InputAddTL";
 import { FilterBtns } from "../FilterBtns";
 import { AddItemForm } from "../../components";
 import { TasksList } from "../TasksList";
@@ -21,7 +21,7 @@ export const TodoList: React.FC<PropsTypeTodoList> = ({
 }) => (
   <StyledTodoListWrapper>
     <StyledTitle>
-      <InputAddTL
+      <TodoListTitle
         isTodoTitle
         title={title}
         todoListId={todoListId}

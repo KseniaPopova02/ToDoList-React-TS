@@ -4,7 +4,7 @@ import { PropsTypeInputAddTL } from "./PropsTypeInputAddTL";
 import { StyledWrapper } from "./style";
 import { StyledDeleteIcon } from "../../styles";
 
-export const InputAddTL: React.FC<PropsTypeInputAddTL> = ({
+export const TodoListTitle: React.FC<PropsTypeInputAddTL> = ({
   title,
   todoListId,
   changeTodoListTitle,
