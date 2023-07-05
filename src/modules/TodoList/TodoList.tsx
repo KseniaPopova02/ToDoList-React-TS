@@ -1,6 +1,6 @@
 import React from "react";
 import { PropsTypeTodoList } from "./PropsTypeTodoList";
-import { TodoListTitle } from "../InputAddTL";
+import { TodoListTitle } from "../TodoListTitle";
 import { FilterBtns } from "../FilterBtns";
 import { AddItemForm } from "../../components";
 import { TasksList } from "../TasksList";
