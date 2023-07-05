@@ -1,3 +1,3 @@
 export * from "./AddItemForm";
 export * from "./EditableSpan";
-export * from "./DeleteBtn";
+export * from "./Button";

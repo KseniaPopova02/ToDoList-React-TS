@@ -1,4 +1,6 @@
 import { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 
 export const GlobalStyle = createGlobalStyle`
 html{
@@ -6,8 +8,8 @@ html{
 }
 
 body {
-  background-color: #dbb5f5;
-  color: #767676;
+  background-color: #e3e9ff;
+  color: #9298a4;
     margin: 0;
     padding: 0;
     font-family: "Mulish", sans-serif;
@@ -17,6 +19,8 @@ body {
     min-height: 100vh;
    
   }
+`;
 
- 
+export const StyledDeleteIcon = styled(DeleteOutlineOutlinedIcon)`
+  color: #767676;
 `;

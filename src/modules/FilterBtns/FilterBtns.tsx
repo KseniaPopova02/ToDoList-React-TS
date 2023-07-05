@@ -1,6 +1,8 @@
 import React from "react";
 import { PropsTypeFilterBtns } from "./PropsTypeFilterBtns";
 import { FilterValuesType } from "../../types";
+import { StyledWrapper } from "./style";
+import { Button } from "../../components";
 
 export const FilterBtns: React.FC<PropsTypeFilterBtns> = ({
   changeFilter,
@@ -22,30 +24,24 @@ export const FilterBtns: React.FC<PropsTypeFilterBtns> = ({
     }
   };
   return (
-    <div>
-      <button
-        onClick={() => {
-          handleFilterChange("all");
-        }}
-      >
+    <StyledWrapper>
+      <Button handleClick={() => handleFilterChange("all")} styleType="filter">
         All
-      </button>
+      </Button>
 
-      <button
-        onClick={() => {
-          handleFilterChange("inProgress");
-        }}
+      <Button
+        handleClick={() => handleFilterChange("inProgress")}
+        styleType="filter"
       >
         In progress
-      </button>
+      </Button>
 
-      <button
-        onClick={() => {
-          handleFilterChange("completed");
-        }}
+      <Button
+        handleClick={() => handleFilterChange("completed")}
+        styleType="filter"
       >
         Completed
-      </button>
-    </div>
+      </Button>
+    </StyledWrapper>
   );
 };

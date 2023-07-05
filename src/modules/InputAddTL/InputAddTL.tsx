@@ -1,7 +1,8 @@
 import React from "react";
-import { DeleteBtn, EditableSpan } from "../../components";
+import { Button, EditableSpan } from "../../components";
 import { PropsTypeInputAddTL } from "./PropsTypeInputAddTL";
 import { StyledWrapper } from "./style";
+import { StyledDeleteIcon } from "../../styles";
 
 export const InputAddTL: React.FC<PropsTypeInputAddTL> = ({
   title,
@@ -24,7 +25,9 @@ export const InputAddTL: React.FC<PropsTypeInputAddTL> = ({
         title={title}
         handleTitleChange={handleChangeTodoListTitle}
       />
-      <DeleteBtn handleDelete={handleDeleteTodoList} />
+      <Button styleType={"delete"} handleClick={handleDeleteTodoList}>
+        <StyledDeleteIcon />
+      </Button>
     </StyledWrapper>
   );
 };
