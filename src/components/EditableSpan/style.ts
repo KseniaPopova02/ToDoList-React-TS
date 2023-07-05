@@ -5,5 +5,5 @@ type StyledSpanProps = {
 };
 
 export const StyledSpan = styled.span<StyledSpanProps>`
-  font-size: ${(props) => (props.isTodoTitle ? "20px" : "14px")};
+  font-size: ${(props) => (props.isTodoTitle ? "22px" : "16px")};
 `;

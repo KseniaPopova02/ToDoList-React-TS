@@ -12,7 +12,7 @@ const deleteBtnMixin = css`
 
 const addBtnMixin = css`
   border: none;
-  padding: 10px 8px;
+  padding: 10px 15px;
   border-radius: 0 10px 10px 0;
   background-color: #af7eeb;
   color: #fff;

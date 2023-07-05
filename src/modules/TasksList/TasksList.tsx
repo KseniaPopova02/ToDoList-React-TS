@@ -3,6 +3,14 @@ import { EditableSpan } from "../../components";
 import { PropsTypeTasksList } from "./PropsTypeTasksList";
 import { Button } from "../../components";
 import { StyledDeleteIcon } from "../../styles";
+import { Checkbox } from "@mui/material";
+import {
+  StyledLi,
+  StyledTaskWrapper,
+  StyledUl,
+  StyledStarIcon,
+  StyledStarBorderIcon,
+} from "./style";
 
 export const TasksList: React.FC<PropsTypeTasksList> = ({
   tasks,
@@ -12,7 +20,7 @@ export const TasksList: React.FC<PropsTypeTasksList> = ({
   changeTaskTitle,
 }) => {
   return (
-    <ul>
+    <StyledUl>
       {tasks.map((task) => {
         const handleDeleteTask = () => {
           deleteTask(task.id, todoListId);
@@ -27,23 +35,29 @@ export const TasksList: React.FC<PropsTypeTasksList> = ({
         };
 
         return (
-          <li key={task.id}>
-            <input
-              type="checkbox"
-              onChange={handleCheckboxChange}
-              checked={task.isDone}
-            />
-            <EditableSpan
-              isTodoTitle={false}
-              title={task.title}
-              handleTitleChange={handleTitleChange}
-            />
-            <Button styleType={"delete"} handleClick={handleDeleteTask}>
-              <StyledDeleteIcon />
-            </Button>
-          </li>
+          <StyledLi key={task.id}>
+            <StyledTaskWrapper>
+              <div>
+                <Checkbox
+                  icon={<StyledStarBorderIcon />}
+                  checkedIcon={<StyledStarIcon />}
+                  onChange={handleCheckboxChange}
+                  checked={task.isDone}
+                />
+                <EditableSpan
+                  isTodoTitle={false}
+                  title={task.title}
+                  handleTitleChange={handleTitleChange}
+                />
+              </div>
+
+              <Button styleType={"delete"} handleClick={handleDeleteTask}>
+                <StyledDeleteIcon />
+              </Button>
+            </StyledTaskWrapper>
+          </StyledLi>
         );
       })}
-    </ul>
+    </StyledUl>
   );
 };

@@ -42,7 +42,7 @@ export const AddItemForm: React.FC<PropsTypeAddItemForm> = ({
         }
       />
       <Button styleType="add" handleClick={addTitle}>
-        + new task
+        +
       </Button>
     </StyledWrapper>
   );
