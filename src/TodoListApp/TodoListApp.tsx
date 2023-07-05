@@ -8,7 +8,11 @@ import {
   TodoListType,
   TaskType,
 } from "../types";
-import { TodoListInputWrapper, TodoListsWrapper, Wrapper } from "./style";
+import {
+  StyledWrapper,
+  StyledTodoListInputWrapper,
+  StyledTodoListsWrapper,
+} from "./style";
 
 export const TodoListApp = () => {
   const todoListLearnId = nanoid();
@@ -160,14 +164,14 @@ export const TodoListApp = () => {
   };
 
   return (
-    <Wrapper>
-      <TodoListInputWrapper>
+    <StyledWrapper>
+      <StyledTodoListInputWrapper>
         <AddItemForm
           placeholderText="name your todo list"
           handleAddItem={addTodoList}
         />
-      </TodoListInputWrapper>
-      <TodoListsWrapper>
+      </StyledTodoListInputWrapper>
+      <StyledTodoListsWrapper>
         {todoLists.map((todoList) => {
           const filteredTasks = getFilteredTasks(todoList);
           const handleAddTask = (title: string) => {
@@ -191,7 +195,7 @@ export const TodoListApp = () => {
             />
           );
         })}
-      </TodoListsWrapper>
-    </Wrapper>
+      </StyledTodoListsWrapper>
+    </StyledWrapper>
   );
 };
