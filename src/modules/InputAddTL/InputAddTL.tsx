@@ -20,7 +20,7 @@ export const InputAddTL: React.FC<PropsTypeInputAddTL> = ({
   return (
     <StyledWrapper>
       <EditableSpan
-        isTodoTitle
+        isTodoTitle={isTodoTitle}
         title={title}
         handleTitleChange={handleChangeTodoListTitle}
       />
