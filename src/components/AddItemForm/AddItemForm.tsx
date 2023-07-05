@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, KeyboardEvent } from "react";
-import { OutlinedInput } from "@mui/material";
 import { PropsTypeAddItemForm } from "./PropsTypeAddItemForm";
+import { StyledOutlinedInput, StyledWrapper } from "./style";
+import { Button } from "../Button";
 
 export const AddItemForm: React.FC<PropsTypeAddItemForm> = ({
   handleAddItem,
@@ -28,8 +29,8 @@ export const AddItemForm: React.FC<PropsTypeAddItemForm> = ({
   };
 
   return (
-    <div>
-      <OutlinedInput
+    <StyledWrapper>
+      <StyledOutlinedInput
         type="text"
         placeholder={placeholderText}
         value={title}
@@ -40,7 +41,9 @@ export const AddItemForm: React.FC<PropsTypeAddItemForm> = ({
           handleChangeNewTitle(e)
         }
       />
-      <button onClick={addTitle}>add</button>
-    </div>
+      <Button styleType="add" handleClick={addTitle}>
+        + new task
+      </Button>
+    </StyledWrapper>
   );
 };

@@ -11,8 +11,11 @@ const deleteBtnMixin = css`
 `;
 
 const addBtnMixin = css`
-  background-color: transparent;
   border: none;
+  padding: 10px 8px;
+  border-radius: 0 10px 10px 0;
+  background-color: #af7eeb;
+  color: #fff;
 `;
 
 const filterBtnMixin = css`
