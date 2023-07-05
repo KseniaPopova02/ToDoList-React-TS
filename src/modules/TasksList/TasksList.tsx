@@ -1,6 +1,7 @@
 import React from "react";
 import { EditableSpan } from "../../components";
 import { PropsTypeTasksList } from "./PropsTypeTasksList";
+import { DeleteBtn } from "../../components";
 
 export const TasksList: React.FC<PropsTypeTasksList> = ({
   tasks,
@@ -32,10 +33,11 @@ export const TasksList: React.FC<PropsTypeTasksList> = ({
               checked={task.isDone}
             />
             <EditableSpan
+              isTodoTitle={false}
               title={task.title}
               handleTitleChange={handleTitleChange}
             />
-            <button onClick={handleDeleteTask}>delete</button>
+            <DeleteBtn handleDelete={handleDeleteTask} />
           </li>
         );
       })}

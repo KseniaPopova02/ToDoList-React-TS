@@ -1,12 +1,14 @@
 import React from "react";
-import { EditableSpan } from "../../components";
+import { DeleteBtn, EditableSpan } from "../../components";
 import { PropsTypeInputAddTL } from "./PropsTypeInputAddTL";
+import { StyledWrapper } from "./style";
 
 export const InputAddTL: React.FC<PropsTypeInputAddTL> = ({
   title,
   todoListId,
   changeTodoListTitle,
   deleteTodoList,
+  isTodoTitle,
 }) => {
   const handleDeleteTodoList = () => {
     deleteTodoList(todoListId);
@@ -16,12 +18,13 @@ export const InputAddTL: React.FC<PropsTypeInputAddTL> = ({
   };
 
   return (
-    <div>
+    <StyledWrapper>
       <EditableSpan
+        isTodoTitle
         title={title}
         handleTitleChange={handleChangeTodoListTitle}
       />
-      <button onClick={handleDeleteTodoList}>x</button>
-    </div>
+      <DeleteBtn handleDelete={handleDeleteTodoList} />
+    </StyledWrapper>
   );
 };

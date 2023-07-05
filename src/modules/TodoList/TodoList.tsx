@@ -4,7 +4,7 @@ import { InputAddTL } from "../InputAddTL";
 import { FilterBtns } from "../FilterBtns";
 import { AddItemForm } from "../../components";
 import { TasksList } from "../TasksList";
-import { TodoListWrapper } from "./style";
+import { StyledTodoListWrapper, StyledTitle } from "./style";
 
 export const TodoList: React.FC<PropsTypeTodoList> = ({
   title,
@@ -19,19 +19,21 @@ export const TodoList: React.FC<PropsTypeTodoList> = ({
   changeTaskStatus,
   changeTaskTitle,
 }) => (
-  <TodoListWrapper key={todoListId}>
-    <InputAddTL
-      title={title}
-      todoListId={todoListId}
-      changeTodoListTitle={changeTodoListTitle}
-      deleteTodoList={deleteTodoList}
-    />
-    <FilterBtns changeFilter={changeFilter} todoListId={todoListId} />
-
-    <AddItemForm
-      placeholderText={placeholderText}
-      handleAddItem={handleAddItem}
-    />
+  <StyledTodoListWrapper>
+    <StyledTitle>
+      <InputAddTL
+        isTodoTitle
+        title={title}
+        todoListId={todoListId}
+        changeTodoListTitle={changeTodoListTitle}
+        deleteTodoList={deleteTodoList}
+      />
+      <FilterBtns changeFilter={changeFilter} todoListId={todoListId} />
+      <AddItemForm
+        placeholderText={placeholderText}
+        handleAddItem={handleAddItem}
+      />
+    </StyledTitle>
 
     <TasksList
       tasks={tasks}
@@ -40,5 +42,5 @@ export const TodoList: React.FC<PropsTypeTodoList> = ({
       changeTaskStatus={changeTaskStatus}
       changeTaskTitle={changeTaskTitle}
     />
-  </TodoListWrapper>
+  </StyledTodoListWrapper>
 );

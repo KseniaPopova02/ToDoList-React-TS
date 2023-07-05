@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
-export const TodoListWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+export const StyledTodoListWrapper = styled.div`
   align-self: flex-start;
   max-width: 50%;
   flex: 1;
@@ -12,4 +9,8 @@ export const TodoListWrapper = styled.div`
   border-radius: 10px;
   padding: 10px;
   margin: 20px;
+`;
+
+export const StyledTitle = styled.div`
+  text-align: center;
 `;

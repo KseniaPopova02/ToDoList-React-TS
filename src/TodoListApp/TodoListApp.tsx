@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import { AddItemForm } from "../components";
-import { TodoList } from "../modules";
+import { TodoList } from "../modules/TodoList/TodoList";
 import {
   TasksStateType,
   FilterValuesType,
@@ -176,6 +176,7 @@ export const TodoListApp = () => {
 
           return (
             <TodoList
+              key={todoList.id}
               title={todoList.title}
               todoListId={todoList.id}
               changeTodoListTitle={changeTodoListTitle}

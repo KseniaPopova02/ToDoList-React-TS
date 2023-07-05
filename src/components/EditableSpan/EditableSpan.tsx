@@ -1,10 +1,12 @@
 import React, { useState, ChangeEvent } from "react";
 import { Input } from "@mui/material";
 import { PropsTypeEditableSpan } from "./PropsTypeEditableSpan";
+import { StyledSpan } from "./style";
 
 export const EditableSpan: React.FC<PropsTypeEditableSpan> = ({
   handleTitleChange,
   title,
+  isTodoTitle,
 }) => {
   const [editMode, setEditMode] = useState(false);
   const [newTitle, setNewTitle] = useState("");
@@ -29,6 +31,8 @@ export const EditableSpan: React.FC<PropsTypeEditableSpan> = ({
       value={newTitle}
     />
   ) : (
-    <span onDoubleClick={activateEditMode}>{title}</span>
+    <StyledSpan isTodoTitle={isTodoTitle} onDoubleClick={activateEditMode}>
+      {title}
+    </StyledSpan>
   );
 };
