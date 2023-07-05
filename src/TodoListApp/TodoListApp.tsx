@@ -1,21 +1,16 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import { AddItemForm } from "../components";
-import { InputAddTL, FilterBtns, TasksList } from "../modules";
+import { TodoList } from "../modules";
 import {
   TasksStateType,
   FilterValuesType,
   TodoListType,
   TaskType,
 } from "../types";
-import {
-  TodoListInputWrapper,
-  TodoListWrapper,
-  TodoListsWrapper,
-  Wrapper,
-} from "./style";
+import { TodoListInputWrapper, TodoListsWrapper, Wrapper } from "./style";
 
-export const TodoList = () => {
+export const TodoListApp = () => {
   const todoListLearnId = nanoid();
   const todoListBuyId = nanoid();
   const [todoLists, setTodoLists] = useState<Array<TodoListType>>([
@@ -175,35 +170,24 @@ export const TodoList = () => {
       <TodoListsWrapper>
         {todoLists.map((todoList) => {
           const filteredTasks = getFilteredTasks(todoList);
+          const handleAddTask = (title: string) => {
+            addTask(title, todoList.id);
+          };
 
           return (
-            <TodoListWrapper key={todoList.id}>
-              <InputAddTL
-                title={todoList.title}
-                todoListId={todoList.id}
-                changeTodoListTitle={changeTodoListTitle}
-                deleteTodoList={deleteTodoList}
-              />
-              <FilterBtns
-                changeFilter={changeFilter}
-                todoListId={todoList.id}
-              />
-
-              <AddItemForm
-                placeholderText={"enter your task"}
-                handleAddItem={(title: string) => {
-                  addTask(title, todoList.id);
-                }}
-              />
-
-              <TasksList
-                tasks={filteredTasks}
-                todoListId={todoList.id}
-                deleteTask={deleteTask}
-                changeTaskStatus={changeTaskStatus}
-                changeTaskTitle={changeTaskTitle}
-              />
-            </TodoListWrapper>
+            <TodoList
+              title={todoList.title}
+              todoListId={todoList.id}
+              changeTodoListTitle={changeTodoListTitle}
+              deleteTodoList={deleteTodoList}
+              changeFilter={changeFilter}
+              placeholderText={"enter your task"}
+              handleAddItem={handleAddTask}
+              tasks={filteredTasks}
+              deleteTask={deleteTask}
+              changeTaskStatus={changeTaskStatus}
+              changeTaskTitle={changeTaskTitle}
+            />
           );
         })}
       </TodoListsWrapper>
