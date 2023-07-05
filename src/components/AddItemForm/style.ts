@@ -11,6 +11,9 @@ export const StyledOutlinedInput = styled(OutlinedInput)`
   &.MuiInputBase-root.MuiOutlinedInput-root.MuiInputBase-colorPrimary.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
     border-radius: 10px 0 0 10px;
     border-color: #af7eeb;
+    @media (max-width: 435px) {
+      font-size: 15px;
+    }
   }
   &.Mui-focused .MuiOutlinedInput-notchedOutline {
     border: 1px solid #af7eeb !important;

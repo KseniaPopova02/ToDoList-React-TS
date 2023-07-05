@@ -32,6 +32,10 @@ export const StyledBtn = styled.button<StyledBtnProps>`
 
   & + button {
     margin-left: 10px;
+    @media (max-width: 485px) {
+      margin-left: 0;
+      margin-top: 10px;
+    }
   }
   ${({ styleType }) => {
     if (styleType === "delete") {
