@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { nanoid } from "nanoid";
 import { AddItemForm } from "../components";
 import { TodoList } from "../modules/TodoList/TodoList";
@@ -13,6 +14,7 @@ import {
   changeTaskStatus,
   changeTaskTitle,
   addTodoList,
+  fetchTodoLists,
   deleteTodoList,
   changeTodoListTitle,
   changeFilter,
@@ -24,6 +26,12 @@ export const TodoListApp = () => {
   const dispatch = useAppDispatch();
   const todoLists = useAppSelector((state) => state.todoLists.todoLists);
   const tasks = useAppSelector((state) => state.tasks.tasks);
+
+  useEffect(() => {
+    dispatch(fetchTodoLists());
+  }, [dispatch]);
+
+  console.log(todoLists);
 
   const addTaskHandler = (item: string, todoListId: string) => {
     const newTask: TaskType = {

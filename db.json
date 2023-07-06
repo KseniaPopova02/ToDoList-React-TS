@@ -1,4 +1,4 @@
 {
-  "todoLists": [],
+  "todoLists": [{ "id": "string", "title": "ring", "filter": "completed" }],
   "tasks": {}
 }

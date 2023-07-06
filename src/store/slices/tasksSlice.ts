@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { TaskType } from "../../types";
+import axios from "axios";
+import { API_BASE_URL } from "../../api";
 
 type TasksState = {
   tasks: { [key: string]: TaskType[] };
