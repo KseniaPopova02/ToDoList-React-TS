@@ -1,13 +1,7 @@
-import { useState } from "react";
 import { nanoid } from "nanoid";
 import { AddItemForm } from "../components";
 import { TodoList } from "../modules/TodoList/TodoList";
-import {
-  TasksStateType,
-  FilterValuesType,
-  TodoListType,
-  TaskType,
-} from "../types";
+import { FilterValuesType, TodoListType, TaskType } from "../types";
 import {
   StyledWrapper,
   StyledTodoListInputWrapper,
