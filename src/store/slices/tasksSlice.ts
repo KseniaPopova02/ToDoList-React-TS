@@ -18,12 +18,12 @@ const tasksSlice = createSlice({
       action: PayloadAction<{ todoListId: string; task: TaskType }>
     ) => {
       const { todoListId, task } = action.payload;
-      if (state.tasks[todoListId]) {
-        state.tasks[todoListId].push(task);
-      } else {
-        state.tasks[todoListId] = [task];
+      if (!state.tasks[todoListId]) {
+        state.tasks[todoListId] = [];
       }
+      state.tasks[todoListId].push(task);
     },
+
     deleteTask: (
       state,
       action: PayloadAction<{ todoListId: string; taskId: string }>
@@ -33,6 +33,7 @@ const tasksSlice = createSlice({
         (task) => task.id !== taskId
       );
     },
+
     changeTaskStatus: (
       state,
       action: PayloadAction<{
@@ -43,11 +44,12 @@ const tasksSlice = createSlice({
     ) => {
       const { todoListId, taskId, isDone } = action.payload;
       const tasks = state.tasks[todoListId];
-      const task = tasks.find((task) => task.id === taskId);
-      if (task) {
-        task.isDone = isDone;
+      const taskIndex = tasks.findIndex((task) => task.id === taskId);
+      if (taskIndex !== -1) {
+        tasks[taskIndex].isDone = isDone;
       }
     },
+
     changeTaskTitle: (
       state,
       action: PayloadAction<{
@@ -58,9 +60,9 @@ const tasksSlice = createSlice({
     ) => {
       const { todoListId, taskId, newTitle } = action.payload;
       const tasks = state.tasks[todoListId];
-      const task = tasks.find((task) => task.id === taskId);
-      if (task) {
-        task.title = newTitle;
+      const taskIndex = tasks.findIndex((task) => task.id === taskId);
+      if (taskIndex !== -1) {
+        tasks[taskIndex].title = newTitle;
       }
     },
   },
