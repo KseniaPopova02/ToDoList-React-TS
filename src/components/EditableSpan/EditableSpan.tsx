@@ -15,6 +15,7 @@ export const EditableSpan: React.FC<PropsTypeEditableSpan> = ({
     setEditMode(true);
     setNewTitle(title);
   };
+
   const activateViewMode = () => {
     setEditMode(false);
     handleTitleChange(newTitle);
@@ -23,10 +24,17 @@ export const EditableSpan: React.FC<PropsTypeEditableSpan> = ({
   const getTitleChangedValue = (e: ChangeEvent<HTMLInputElement>) =>
     setNewTitle(e.currentTarget.value);
 
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      activateViewMode();
+    }
+  };
+
   return editMode ? (
     <Input
       onChange={getTitleChangedValue}
       onBlur={activateViewMode}
+      onKeyPress={handleKeyPress}
       autoFocus
       value={newTitle}
     />
