@@ -24,32 +24,33 @@ export const fetchTasks = createAsyncThunk("todoLists/fetchTasks", async () => {
   }
 });
 
-export const addTask = createAsyncThunk(
-  "tasks/addTask",
-  async (
-    payload: { todoListId: string; task: TaskType },
-    { rejectWithValue }
-  ) => {
-    try {
-      const { todoListId, task } = payload;
-
-      const response = await axios.get(`${API_BASE_URL}/${TASKS}`);
-      const tasks = response.data;
-
-      if (!tasks[todoListId]) {
-        tasks[todoListId] = [];
-      }
-
-      tasks[todoListId] = [...tasks[todoListId], task];
-
-      await axios.put(`${API_BASE_URL}/${TASKS}`, tasks);
-
-      return { todoListId, task };
-    } catch (error) {
-      return rejectWithValue("Failed to add task.");
-    }
+export const addTask = createAsyncThunk<
+  { todoListId: string; task: TaskType },
+  { todoListId: string; task: TaskType },
+  {
+    rejectValue: string;
   }
-);
+>("tasks/addTask", async ({ todoListId, task }, { rejectWithValue }) => {
+  if (!task.title) {
+    return rejectWithValue("Task title cannot be empty.");
+  }
+  try {
+    const response = await axios.get(`${API_BASE_URL}/${TASKS}`);
+    const tasks = response.data;
+
+    if (!tasks[todoListId]) {
+      tasks[todoListId] = [];
+    }
+
+    tasks[todoListId] = [...tasks[todoListId], task];
+
+    await axios.put(`${API_BASE_URL}/${TASKS}`, tasks);
+
+    return { todoListId, task };
+  } catch (error) {
+    return rejectWithValue("Failed to add task.");
+  }
+});
 
 const tasksSlice = createSlice({
   name: "tasks",

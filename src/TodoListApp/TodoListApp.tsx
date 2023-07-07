@@ -27,7 +27,6 @@ export const TodoListApp = () => {
   const dispatch = useAppDispatch();
   const todoLists = useAppSelector((state) => state.todoLists.todoLists);
   const tasks = useAppSelector((state) => state.tasks.tasks);
-  // console.log(tasks);
 
   useEffect(() => {
     dispatch(fetchTodoLists());
