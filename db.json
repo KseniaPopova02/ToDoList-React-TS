@@ -1,15 +1,4 @@
 {
-  "todoLists": [
-    {
-      "id": "sBd20QxYXe6a2vD_qyIWC",
-      "filter": "all",
-      "title": "what to et"
-    },
-    {
-      "id": "-Xx4RfniMMcd38F16CXmp",
-      "filter": "all",
-      "title": "what"
-    }
-  ],
+  "todoLists": [],
   "tasks": {}
 }

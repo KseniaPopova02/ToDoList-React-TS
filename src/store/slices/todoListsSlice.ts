@@ -126,17 +126,12 @@ const todoListsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchTodoLists.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
+
       .addCase(fetchTodoLists.fulfilled, (state, action) => {
         state.loading = false;
         state.todoLists = action.payload;
       })
-      .addCase(addTodoList.pending, (state) => {
-        state.error = null;
-      })
+
       .addCase(addTodoList.fulfilled, (state, action) => {
         state.loading = false;
         state.todoLists.push(action.payload);
@@ -173,6 +168,13 @@ const todoListsSlice = createSlice({
           return todoList;
         });
       })
+      .addMatcher(
+        (action) => action.type.endsWith("pending"),
+        (state) => {
+          state.loading = true;
+          state.error = null;
+        }
+      )
       .addMatcher(isError, (state, action: PayloadAction<string>) => {
         state.error = action.payload;
         state.loading = false;
