@@ -1,4 +1,9 @@
-import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  PayloadAction,
+  createAsyncThunk,
+  AnyAction,
+} from "@reduxjs/toolkit";
 import { TodoListType, FilterValuesType } from "../../types";
 import axios from "axios";
 import { API_BASE_URL, TODO_LISTS } from "../../api";
@@ -13,6 +18,10 @@ const initialState: TodoListsState = {
   todoLists: [],
   loading: false,
   error: null,
+};
+
+const isError = (action: AnyAction) => {
+  return action.type.endsWith("rejected");
 };
 
 export const fetchTodoLists = createAsyncThunk<
@@ -35,6 +44,9 @@ export const addTodoList = createAsyncThunk<
 >(
   "todoLists/addTodoList",
   async (todoList: TodoListType, { rejectWithValue }) => {
+    if (!todoList.title) {
+      return rejectWithValue("Todo list title cannot be empty.");
+    }
     try {
       const response = await axios.post(
         `${API_BASE_URL}/${TODO_LISTS}`,
@@ -48,45 +60,70 @@ export const addTodoList = createAsyncThunk<
   }
 );
 
+export const deleteTodoList = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>(
+  "todoLists/deleteTodoList",
+  async (todoListId: string, { rejectWithValue }) => {
+    try {
+      await axios.delete(`${API_BASE_URL}/${TODO_LISTS}/${todoListId}`);
+      return todoListId;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue("Failed to delete todo list.");
+    }
+  }
+);
+
+export const changeTodoListTitle = createAsyncThunk<
+  { todoListId: string; newTitle: string },
+  { todoListId: string; newTitle: string },
+  { rejectValue: string }
+>(
+  "todoLists/changeTodoListTitle",
+  async ({ todoListId, newTitle }, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(
+        `${API_BASE_URL}/${TODO_LISTS}/${todoListId}`,
+        {
+          title: newTitle,
+        }
+      );
+      return { todoListId, newTitle: response.data.title };
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue("Failed to change todo list title.");
+    }
+  }
+);
+
+export const changeFilter = createAsyncThunk<
+  { todoListId: string; filter: FilterValuesType },
+  { todoListId: string; filter: FilterValuesType },
+  { rejectValue: string }
+>(
+  "todoLists/changeFilter",
+  async ({ todoListId, filter }, { rejectWithValue }) => {
+    try {
+      const response = await axios.patch(
+        `${API_BASE_URL}/${TODO_LISTS}/${todoListId}`,
+        {
+          filter,
+        }
+      );
+      return { todoListId, filter: response.data.filter };
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue("Failed to change filter.");
+    }
+  }
+);
 const todoListsSlice = createSlice({
   name: "todoLists",
   initialState,
-  reducers: {
-    // addTodoList: (state, action: PayloadAction<TodoListType>) => {
-    //   const todoList = action.payload;
-    //   state.todoLists.push(todoList);
-    // },
-    deleteTodoList: (state, action: PayloadAction<string>) => {
-      const todoListId = action.payload;
-      state.todoLists = state.todoLists.filter(
-        (todoList) => todoList.id !== todoListId
-      );
-    },
-    changeTodoListTitle: (
-      state,
-      action: PayloadAction<{ todoListId: string; newTitle: string }>
-    ) => {
-      const { todoListId, newTitle } = action.payload;
-      const todoList = state.todoLists.find(
-        (todoList) => todoList.id === todoListId
-      );
-      if (todoList) {
-        todoList.title = newTitle;
-      }
-    },
-    changeFilter: (
-      state,
-      action: PayloadAction<{ todoListId: string; filter: FilterValuesType }>
-    ) => {
-      const { todoListId, filter } = action.payload;
-      const todoList = state.todoLists.find(
-        (todoList) => todoList.id === todoListId
-      );
-      if (todoList) {
-        todoList.filter = filter;
-      }
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchTodoLists.pending, (state) => {
@@ -97,21 +134,50 @@ const todoListsSlice = createSlice({
         state.loading = false;
         state.todoLists = action.payload;
       })
-      .addCase(fetchTodoLists.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message ?? null;
-      })
       .addCase(addTodoList.pending, (state) => {
         state.error = null;
       })
       .addCase(addTodoList.fulfilled, (state, action) => {
         state.loading = false;
         state.todoLists.push(action.payload);
+      })
+      .addCase(deleteTodoList.fulfilled, (state, action) => {
+        state.loading = false;
+        state.todoLists = state.todoLists.filter(
+          (todoList) => todoList.id !== action.payload
+        );
+      })
+      .addCase(changeTodoListTitle.fulfilled, (state, action) => {
+        state.loading = false;
+        const { todoListId, newTitle } = action.payload;
+        state.todoLists = state.todoLists.map((todoList) => {
+          if (todoList.id === todoListId) {
+            return {
+              ...todoList,
+              title: newTitle,
+            };
+          }
+          return todoList;
+        });
+      })
+      .addCase(changeFilter.fulfilled, (state, action) => {
+        state.loading = false;
+        const { todoListId, filter } = action.payload;
+        state.todoLists = state.todoLists.map((todoList) => {
+          if (todoList.id === todoListId) {
+            return {
+              ...todoList,
+              filter: filter,
+            };
+          }
+          return todoList;
+        });
+      })
+      .addMatcher(isError, (state, action: PayloadAction<string>) => {
+        state.error = action.payload;
+        state.loading = false;
       });
   },
 });
-
-export const { deleteTodoList, changeTodoListTitle, changeFilter } =
-  todoListsSlice.actions;
 
 export const todoListsReducer = todoListsSlice.reducer;

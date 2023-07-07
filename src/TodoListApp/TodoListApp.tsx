@@ -31,8 +31,6 @@ export const TodoListApp = () => {
     dispatch(fetchTodoLists());
   }, [dispatch]);
 
-  console.log(todoLists);
-
   const addTaskHandler = (item: string, todoListId: string) => {
     const newTask: TaskType = {
       id: nanoid(),
