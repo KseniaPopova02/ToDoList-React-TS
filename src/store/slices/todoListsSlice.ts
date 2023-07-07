@@ -37,22 +37,6 @@ export const fetchTodoLists = createAsyncThunk<
   }
 });
 
-export const fetchFilter = createAsyncThunk<
-  FilterValuesType,
-  string,
-  { rejectValue: string }
->("todoLists/fetchFilter", async (todoListId: string, { rejectWithValue }) => {
-  try {
-    const response = await axios.get(
-      `${API_BASE_URL}/${TODO_LISTS}/${todoListId}`
-    );
-    return response.data.filter;
-  } catch (error) {
-    console.log(error);
-    return rejectWithValue("Failed to fetch filter.");
-  }
-});
-
 export const addTodoList = createAsyncThunk<
   TodoListType,
   TodoListType,

@@ -20,15 +20,18 @@ import {
   changeFilter,
   useAppDispatch,
   useAppSelector,
+  fetchTasks,
 } from "../store";
 
 export const TodoListApp = () => {
   const dispatch = useAppDispatch();
   const todoLists = useAppSelector((state) => state.todoLists.todoLists);
   const tasks = useAppSelector((state) => state.tasks.tasks);
+  // console.log(tasks);
 
   useEffect(() => {
     dispatch(fetchTodoLists());
+    dispatch(fetchTasks());
   }, [dispatch]);
 
   const addTaskHandler = (item: string, todoListId: string) => {

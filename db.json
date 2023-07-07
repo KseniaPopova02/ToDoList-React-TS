@@ -1,20 +1,40 @@
 {
   "todoLists": [
     {
-      "id": "NnA5-gcmH3OZJfUPXpxpk",
-      "filter": "inProgress",
-      "title": "ыв"
-    },
-    {
-      "id": "XDugbcC9rFlObQcjswWeW",
+      "id": "vMBwfhFy-iMCOD2gxbVYR",
       "filter": "all",
       "title": "ыв"
     },
     {
-      "id": "P2SbSYbkQvjwi1_BwKMwl",
-      "filter": "completed",
-      "title": "ва"
+      "id": "ol6EBKrYaBN_UFanKo5m3",
+      "filter": "all",
+      "title": "ыв"
     }
   ],
-  "tasks": {}
+  "tasks": {
+    "vMBwfhFy-iMCOD2gxbVYR": [
+      {
+        "id": "9ZDcqXCPh61ciygKLUVZn",
+        "title": "ыв",
+        "isDone": false
+      },
+      {
+        "id": "4djEptVA0eLzi_x7BaBuv",
+        "title": "ыв",
+        "isDone": false
+      }
+    ],
+    "ol6EBKrYaBN_UFanKo5m3": [
+      {
+        "id": "qLv5ugfsOLh7wM0AO9vq5",
+        "title": "ап",
+        "isDone": false
+      },
+      {
+        "id": "_d4YKPG0UwOOWPijN2O_b",
+        "title": "ап",
+        "isDone": false
+      }
+    ]
+  }
 }

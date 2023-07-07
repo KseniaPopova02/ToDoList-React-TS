@@ -1,31 +1,60 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { TaskType } from "../../types";
 import axios from "axios";
-import { API_BASE_URL } from "../../api";
+import { API_BASE_URL, TASKS } from "../../api";
 
 type TasksState = {
   tasks: { [key: string]: TaskType[] };
+  loading: boolean;
+  error: string | null;
 };
 
 const initialState: TasksState = {
   tasks: {},
+  loading: false,
+  error: null,
 };
+
+export const fetchTasks = createAsyncThunk("todoLists/fetchTasks", async () => {
+  try {
+    const response = await axios.get(`${API_BASE_URL}/${TASKS}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+});
+
+export const addTask = createAsyncThunk(
+  "tasks/addTask",
+  async (
+    payload: { todoListId: string; task: TaskType },
+    { rejectWithValue }
+  ) => {
+    try {
+      const { todoListId, task } = payload;
+
+      const response = await axios.get(`${API_BASE_URL}/${TASKS}`);
+      const tasks = response.data;
+
+      if (!tasks[todoListId]) {
+        tasks[todoListId] = [];
+      }
+
+      tasks[todoListId] = [...tasks[todoListId], task];
+
+      await axios.put(`${API_BASE_URL}/${TASKS}`, tasks);
+
+      return { todoListId, task };
+    } catch (error) {
+      return rejectWithValue("Failed to add task.");
+    }
+  }
+);
 
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    addTask: (
-      state,
-      action: PayloadAction<{ todoListId: string; task: TaskType }>
-    ) => {
-      const { todoListId, task } = action.payload;
-      if (!state.tasks[todoListId]) {
-        state.tasks[todoListId] = [];
-      }
-      state.tasks[todoListId].push(task);
-    },
-
     deleteTask: (
       state,
       action: PayloadAction<{ todoListId: string; taskId: string }>
@@ -68,9 +97,32 @@ const tasksSlice = createSlice({
       }
     },
   },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchTasks.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchTasks.fulfilled, (state, action) => {
+        state.loading = false;
+        state.tasks = action.payload;
+      })
+      .addCase(addTask.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addTask.fulfilled, (state, action) => {
+        state.loading = false;
+        const { todoListId, task } = action.payload;
+        if (!state.tasks[todoListId]) {
+          state.tasks[todoListId] = [];
+        }
+        state.tasks[todoListId] = [...state.tasks[todoListId], task];
+      });
+  },
 });
 
-export const { addTask, deleteTask, changeTaskStatus, changeTaskTitle } =
+export const { deleteTask, changeTaskStatus, changeTaskTitle } =
   tasksSlice.actions;
 
 export const tasksReducer = tasksSlice.reducer;

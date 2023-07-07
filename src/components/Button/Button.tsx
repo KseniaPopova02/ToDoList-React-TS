@@ -8,7 +8,6 @@ export const Button: React.FC<PropsTypeButton> = ({
   children,
   isActive,
 }) => {
-  console.log(isActive);
   return (
     <StyledBtn styleType={styleType} isActive={isActive} onClick={handleClick}>
       {children}
