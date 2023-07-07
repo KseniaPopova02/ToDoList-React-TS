@@ -2,7 +2,7 @@
   "todoLists": [
     {
       "id": "NnA5-gcmH3OZJfUPXpxpk",
-      "filter": "completed",
+      "filter": "inProgress",
       "title": "ыв"
     },
     {
@@ -12,7 +12,7 @@
     },
     {
       "id": "P2SbSYbkQvjwi1_BwKMwl",
-      "filter": "all",
+      "filter": "completed",
       "title": "ва"
     }
   ],

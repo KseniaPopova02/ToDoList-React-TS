@@ -1,18 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { PropsTypeFilterBtns } from "./PropsTypeFilterBtns";
 import { FilterValuesType } from "../../types";
 import { StyledWrapper } from "./style";
 import { Button } from "../../components";
+import { useAppSelector } from "../../store";
 
 export const FilterBtns: React.FC<PropsTypeFilterBtns> = ({
   changeFilter,
   todoListId,
 }) => {
-  const [activeButton, setActiveButton] = useState<string>("all");
+  const filter = useAppSelector((state) => {
+    const todoList = state.todoLists.todoLists.find(
+      (list) => list.id === todoListId
+    );
+    return todoList ? todoList.filter : "";
+  });
 
   const handleFilterChange = (value: FilterValuesType) => {
-    setActiveButton(value);
-
     switch (value) {
       case "all":
         changeFilter("all", todoListId);
@@ -30,7 +34,7 @@ export const FilterBtns: React.FC<PropsTypeFilterBtns> = ({
   return (
     <StyledWrapper>
       <Button
-        isActive={activeButton === "all"}
+        isActive={filter === "all"}
         handleClick={() => handleFilterChange("all")}
         styleType="filter"
       >
@@ -38,7 +42,7 @@ export const FilterBtns: React.FC<PropsTypeFilterBtns> = ({
       </Button>
 
       <Button
-        isActive={activeButton === "inProgress"}
+        isActive={filter === "inProgress"}
         handleClick={() => handleFilterChange("inProgress")}
         styleType="filter"
       >
@@ -46,7 +50,7 @@ export const FilterBtns: React.FC<PropsTypeFilterBtns> = ({
       </Button>
 
       <Button
-        isActive={activeButton === "completed"}
+        isActive={filter === "completed"}
         handleClick={() => handleFilterChange("completed")}
         styleType="filter"
       >
