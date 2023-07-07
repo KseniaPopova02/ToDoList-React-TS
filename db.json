@@ -1,0 +1,30 @@
+{
+  "todoLists": [
+    {
+      "id": "LHyQI27aFOeryIeQfczn4",
+      "filter": "all",
+      "title": "ва"
+    }
+  ],
+  "tasks": {
+    "T47gLZej_sEYYauECMiAH": [
+      {
+        "id": "85YWYJ77PtWj9pF7c5STv",
+        "title": "df",
+        "isDone": false
+      },
+      {
+        "id": "BUecUncuRaJW6o6i2VwIa",
+        "title": "df",
+        "isDone": false
+      }
+    ],
+    "LHyQI27aFOeryIeQfczn4": [
+      {
+        "id": "__JrbW3FZ1iwErG_2MFEl",
+        "title": "ва",
+        "isDone": false
+      }
+    ]
+  }
+}
