@@ -1,24 +1,16 @@
-import React, { useState } from "react";
-import { PropsTypeButton } from "./PropsTypeDeleteBtn";
+import React from "react";
+import { PropsTypeButton } from "./PropsTypeBtn";
 import { StyledBtn } from "./style";
+
 export const Button: React.FC<PropsTypeButton> = ({
   styleType,
   handleClick,
   children,
+  isActive,
 }) => {
-  const [isActive, setIsActive] = useState(false);
-
-  const handleButtonClick = () => {
-    setIsActive(!isActive);
-    handleClick();
-  };
-
+  console.log(isActive);
   return (
-    <StyledBtn
-      styleType={styleType}
-      isActive={isActive}
-      onClick={handleButtonClick}
-    >
+    <StyledBtn styleType={styleType} isActive={isActive} onClick={handleClick}>
       {children}
     </StyledBtn>
   );

@@ -41,7 +41,7 @@ export const AddItemForm: React.FC<PropsTypeAddItemForm> = ({
           handleChangeNewTitle(e)
         }
       />
-      <Button styleType="add" handleClick={addTitle}>
+      <Button isActive={false} styleType="add" handleClick={addTitle}>
         +
       </Button>
     </StyledWrapper>

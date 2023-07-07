@@ -2,12 +2,12 @@
   "todoLists": [
     {
       "id": "NnA5-gcmH3OZJfUPXpxpk",
-      "filter": "all",
+      "filter": "completed",
       "title": "ыв"
     },
     {
       "id": "XDugbcC9rFlObQcjswWeW",
-      "filter": "completed",
+      "filter": "all",
       "title": "ыв"
     },
     {

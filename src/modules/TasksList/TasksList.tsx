@@ -51,7 +51,11 @@ export const TasksList: React.FC<PropsTypeTasksList> = ({
                 />
               </div>
 
-              <Button styleType={"delete"} handleClick={handleDeleteTask}>
+              <Button
+                isActive={false}
+                styleType={"delete"}
+                handleClick={handleDeleteTask}
+              >
                 <StyledDeleteIcon />
               </Button>
             </StyledTaskWrapper>

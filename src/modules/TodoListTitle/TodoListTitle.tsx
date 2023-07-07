@@ -25,7 +25,11 @@ export const TodoListTitle: React.FC<PropsTypeInputAddTL> = ({
         title={title}
         handleTitleChange={handleChangeTodoListTitle}
       />
-      <Button styleType={"delete"} handleClick={handleDeleteTodoList}>
+      <Button
+        isActive={false}
+        styleType={"delete"}
+        handleClick={handleDeleteTodoList}
+      >
         <StyledDeleteIcon />
       </Button>
     </StyledWrapper>
