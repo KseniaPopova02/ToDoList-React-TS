@@ -28,14 +28,34 @@ export const fetchTodoLists = createAsyncThunk<
   }
 });
 
+export const addTodoList = createAsyncThunk<
+  TodoListType,
+  TodoListType,
+  { rejectValue: string }
+>(
+  "todoLists/addTodoList",
+  async (todoList: TodoListType, { rejectWithValue }) => {
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/${TODO_LISTS}`,
+        todoList
+      );
+      return response.data as TodoListType;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue("Failed to add todo list.");
+    }
+  }
+);
+
 const todoListsSlice = createSlice({
   name: "todoLists",
   initialState,
   reducers: {
-    addTodoList: (state, action: PayloadAction<TodoListType>) => {
-      const todoList = action.payload;
-      state.todoLists.push(todoList);
-    },
+    // addTodoList: (state, action: PayloadAction<TodoListType>) => {
+    //   const todoList = action.payload;
+    //   state.todoLists.push(todoList);
+    // },
     deleteTodoList: (state, action: PayloadAction<string>) => {
       const todoListId = action.payload;
       state.todoLists = state.todoLists.filter(
@@ -80,15 +100,18 @@ const todoListsSlice = createSlice({
       .addCase(fetchTodoLists.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message ?? null;
+      })
+      .addCase(addTodoList.pending, (state) => {
+        state.error = null;
+      })
+      .addCase(addTodoList.fulfilled, (state, action) => {
+        state.loading = false;
+        state.todoLists.push(action.payload);
       });
   },
 });
 
-export const {
-  addTodoList,
-  deleteTodoList,
-  changeTodoListTitle,
-  changeFilter,
-} = todoListsSlice.actions;
+export const { deleteTodoList, changeTodoListTitle, changeFilter } =
+  todoListsSlice.actions;
 
 export const todoListsReducer = todoListsSlice.reducer;
