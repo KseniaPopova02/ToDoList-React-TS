@@ -3,6 +3,7 @@ import { StyledBtnType } from "../../types";
 
 type StyledBtnProps = {
   styleType: StyledBtnType;
+  isActive: boolean;
 };
 
 const deleteBtnMixin = css`
@@ -37,13 +38,17 @@ export const StyledBtn = styled.button<StyledBtnProps>`
       margin-top: 10px;
     }
   }
-  ${({ styleType }) => {
+
+  ${({ styleType, isActive }) => {
     if (styleType === "delete") {
       return deleteBtnMixin;
     } else if (styleType === "add") {
       return addBtnMixin;
     } else if (styleType === "filter") {
-      return filterBtnMixin;
+      return css`
+        ${filterBtnMixin};
+        background-color: ${isActive ? "#9549f2" : "#af7eeb"};
+      `;
     }
   }}
 `;
