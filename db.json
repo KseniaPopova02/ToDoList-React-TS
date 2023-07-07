@@ -6,52 +6,10 @@
       "title": "what to et"
     },
     {
-      "id": "G9aWXfnnzGGrlQQm8NEy8",
-      "filter": "all",
-      "title": "what to drink"
-    },
-    {
       "id": "-Xx4RfniMMcd38F16CXmp",
       "filter": "all",
       "title": "what"
     }
   ],
-  "tasks": {
-    "sBd20QxYXe6a2vD_qyIWC": [
-      {
-        "id": "M8LxceBXyUgep0AG63Syk",
-        "title": "bread",
-        "isDone": false
-      },
-      {
-        "id": "zg55AX41KYftR2Vh1o0MG",
-        "title": "toast",
-        "isDone": false
-      },
-      {
-        "id": "CJGXmRb6BtfwyuFRTxWyM",
-        "title": "egg",
-        "isDone": false
-      }
-    ],
-    "G9aWXfnnzGGrlQQm8NEy8": [
-      {
-        "id": "JvSrkJ2ZQHNnJ_ZmAS7LH",
-        "title": "water",
-        "isDone": false
-      },
-      {
-        "id": "wRd4GhCV6PbtyZoPnUqTj",
-        "title": "sik",
-        "isDone": false
-      }
-    ],
-    "-Xx4RfniMMcd38F16CXmp": [
-      {
-        "id": "U8whj5TozyZPncdPMWOez",
-        "title": "else",
-        "isDone": false
-      }
-    ]
-  }
+  "tasks": {}
 }

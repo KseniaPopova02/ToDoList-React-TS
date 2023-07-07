@@ -52,20 +52,22 @@ export const addTask = createAsyncThunk<
   }
 });
 
+export const deleteTask = createAsyncThunk(
+  "tasks/deleteTask",
+  async ({ todoListId, taskId }: { todoListId: string; taskId: string }) => {
+    try {
+      await axios.delete(`${API_BASE_URL}/${TASKS}/${todoListId}/${taskId}`);
+      return { todoListId, taskId };
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
   reducers: {
-    deleteTask: (
-      state,
-      action: PayloadAction<{ todoListId: string; taskId: string }>
-    ) => {
-      const { todoListId, taskId } = action.payload;
-      state.tasks[todoListId] = state.tasks[todoListId].filter(
-        (task) => task.id !== taskId
-      );
-    },
-
     changeTaskStatus: (
       state,
       action: PayloadAction<{
@@ -119,11 +121,21 @@ const tasksSlice = createSlice({
           state.tasks[todoListId] = [];
         }
         state.tasks[todoListId] = [...state.tasks[todoListId], task];
+      })
+      .addCase(deleteTask.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteTask.fulfilled, (state, action) => {
+        state.loading = false;
+        const { todoListId, taskId } = action.payload;
+        state.tasks[todoListId] = state.tasks[todoListId].filter(
+          (task) => task.id !== taskId
+        );
       });
   },
 });
 
-export const { deleteTask, changeTaskStatus, changeTaskTitle } =
-  tasksSlice.actions;
+export const { changeTaskStatus, changeTaskTitle } = tasksSlice.actions;
 
 export const tasksReducer = tasksSlice.reducer;
